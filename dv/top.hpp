@@ -68,7 +68,7 @@ SC_MODULE(top) {
       // #endif
 
       uart_if->reset();
-      uart_if->load_baudrate(1500);
+      uart_if->load_baudrate(115200);
 
       // while (!Verilated::gotFinish()) { sc_start(1, SC_NS); }
       while (sim_time < 10000) { 

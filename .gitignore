@@ -1,4 +1,4 @@
 .vscode
-logs
-obj_dir
-features.txt
+*/logs
+*/obj_dir
+features.md

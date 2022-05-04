@@ -17,11 +17,12 @@ gtkwave::addSignalsFromList $uart_sigs
 gtkwave::/Time/Zoom/Zoom_Best_Fit
 
 
-set format_list [list top.uart.BAUDRATE_CNT_WIDTH\[31:0\] top.uart.bauds_counter\[16:0\] top.uart.bauds_lim\[15:0\]]
-# lappend format_list "{top.uart.BAUDRATE_CNT_WIDTH[31:0]}"
-# lappend format_list "{top.uart.bauds_counter[15:0]}"
-# lappend format_list "{top.uart.bauds_lim[15:0]}"
-puts $format_list
+set format_list [list top.dut.uart.BAUDRATE_CNT_WIDTH\[31:0\] top.dut.uart.bauds_counter\[16:0\] top.dut.uart.bauds_lim\[15:0\]]
+# set format_list [list]
+# lappend format_list "{top.dut.uart.BAUDRATE_CNT_WIDTH\[31:0\]}"
+# lappend format_list "{top.dut.uart.bauds_counter\[16:0\]}"
+# lappend format_list "{top.dut.uart.bauds_lim\[15:0\]}"
+puts "format_list : $format_list"
 gtkwave::highlightSignalsFromList $format_list
 gtkwave::/Edit/Data_Format/Decimal
 gtkwave::/Edit/UnHighlight_All

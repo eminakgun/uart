@@ -22,7 +22,7 @@ SC_MODULE(uart_intf) {
 
   sc_signal<bool> baud_tick_int; //dut internal signal
   sc_time baud_tick_ts, baud_tick_p;
-  uint baud_tick_rate;
+  uint32_t baud_tick_rate, target_baudrate;
   
 
   SC_CTOR(uart_intf) {
@@ -54,9 +54,13 @@ SC_MODULE(uart_intf) {
   }
 
   void load_baudrate(uint32_t baudrate){
-    // baudrate calculation
-    bauds_lim = baudrate;
-    std::cout << "Baudrate is set to " << baudrate;
+    double bauds_lim_d;
+    std::cout << "Target baudrate is " << baudrate << endl;
+    target_baudrate = baudrate;
+    /* baudrate calculation */
+    bauds_lim_d = (16 * pow(2, 16) * baudrate) / 10000000;
+    bauds_lim = bauds_lim_d;
+    std::cout << "bauds_lim is set to " << bauds_lim_d << endl;
   }
 
   void baud_tick_monitor(){
@@ -64,13 +68,17 @@ SC_MODULE(uart_intf) {
     {
       if (baud_tick_int)
       {
-        if(baud_tick_ts != SC_ZERO_TIME){
+        /* Calculate, dt and tick rate */
+        if(baud_tick_ts != SC_ZERO_TIME){ // if we have already captured the first pulse
           baud_tick_p = sc_time_stamp() - baud_tick_ts;
           baud_tick_rate = 1 / baud_tick_p.to_seconds();
         }
         baud_tick_ts = sc_time_stamp(); // register current pulse timestamp
-        /* Calculate, dt and tick rate */
-        std:cout << "baud_tick is triggered at " << sc_time_stamp() << endl;
+
+        /* Check for expected tick rate*/
+
+        std::cout << "bauds_lim : " << bauds_lim << endl;
+        std::cout << "baud_tick is triggered at " << sc_time_stamp() << endl;
         std::cout << "baud_tick_p : " << baud_tick_p << endl;
         std::cout << "baud_tick_rate : " << (baud_tick_rate/1e6) << "Mhz" << endl;
       }
