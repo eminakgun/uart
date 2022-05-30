@@ -17,7 +17,7 @@ gtkwave::addSignalsFromList $uart_sigs
 gtkwave::/Time/Zoom/Zoom_Best_Fit
 
 
-set format_list [list top.dut.uart.BAUDRATE_CNT_WIDTH\[31:0\] top.dut.uart.bauds_counter\[16:0\] top.dut.uart.bauds_lim\[15:0\]]
+set format_list [list top.dut.uart.BAUDRATE_CNT_WIDTH\[31:0\] top.dut.uart.bauds_counter\[15:0\] top.dut.uart.bauds_lim_i\[15:0\]]
 # set format_list [list]
 # lappend format_list "{top.dut.uart.BAUDRATE_CNT_WIDTH\[31:0\]}"
 # lappend format_list "{top.dut.uart.bauds_counter\[16:0\]}"

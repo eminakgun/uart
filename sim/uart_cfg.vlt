@@ -1,2 +1,0 @@
-`verilator_config
-public -module "uart" -var "baud_tick"
