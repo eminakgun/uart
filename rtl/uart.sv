@@ -10,7 +10,7 @@ module uart(
   input  tx_en_i,
   input  parity_en_i,
   input  parity_odd_i,
-  input  [BAUDRATE_CNT_WIDTH-1:0] bauds_lim_i,
+  input  [15:0] bauds_lim_i,
   
   // outs
   output tx_done_o,
@@ -18,9 +18,8 @@ module uart(
   output [7:0] rx_data_o, // received data through rx line
   output rx_valid_o
 );
-  parameter BAUDRATE_CNT_WIDTH = 16;
 
-  logic [BAUDRATE_CNT_WIDTH-1:0] bauds_counter;
+  logic [15:0] bauds_counter;
   logic baud_tick_x16; // x16 faster than baudrate
 
   /* Baudrate tick generation */

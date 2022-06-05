@@ -63,7 +63,7 @@ always_ff @(posedge clk_i) begin : tx_logic
       tx_done_o <= 1'b0; //?
 
     if (baud_tick && tx_start) begin : transmitter
-      sreg <= {1'b1, sreg[10:1]}; // padd left with 1's as we shift out
+      sreg <= {1'b1, sreg[10:1]}; // pad left with 1's as we shift out
       tx_bits_cnt <= tx_bits_cnt - 1'b1;
       if(tx_bits_cnt == 4'b0) begin
         // end of xfer
