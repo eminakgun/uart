@@ -1,4 +1,5 @@
 .vscode
 logs/
 verilated/
+runs/
 features.md
