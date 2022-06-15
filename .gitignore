@@ -2,4 +2,8 @@
 logs/
 verilated/
 runs/
+reports/
+.Xil/
+*.jou
+*.log
 features.md
