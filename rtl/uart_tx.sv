@@ -53,16 +53,16 @@ always_ff @(posedge clk_i) begin : tx_logic
     tx_done_o <= 1'b0;
   end
   else begin
+    tx_done_o <= 1'b0; //default assignment
+
     if (tx_en_i && !tx_start) begin : initialize_transmission
       // enabled but not yet started transmitting
       sreg <= {1'b1, (parity_en_i ? parity : 1'b1), tx_data_i, 1'b0};
       tx_bits_cnt <= parity_en_i ? 4'd10 : 4'd9;
       tx_start <= 1'b1;
     end : initialize_transmission
-    else
-      tx_done_o <= 1'b0; //?
 
-    if (baud_tick && tx_start) begin : transmitter
+    if (tx_start && baud_tick) begin : transmitter
       sreg <= {1'b1, sreg[10:1]}; // pad left with 1's as we shift out
       tx_bits_cnt <= tx_bits_cnt - 1'b1;
       if(tx_bits_cnt == 4'b0) begin
