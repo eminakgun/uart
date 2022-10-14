@@ -7,3 +7,6 @@ reports/
 *.jou
 *.log
 features.md
+vivado/xsim.dir
+vivado/xelab.pb
+vivado/xvlog.pb
