@@ -1,0 +1,42 @@
+- register_block:
+  - name: uart_csr
+    byte_size:  16
+
+  - register:
+    - name: uart_ctrl
+      offset_address: 0x0
+      comment: |
+        Control register
+      bit_fields:
+        - { name: tx_en, bit_assignment: { lsb: 0, width: 1 }, type: rw, initial_value: 0}
+        - { name: rx_en, bit_assignment: { lsb: 1, width: 1 }, type: rw, initial_value: 0}
+        - { name: reserved, bit_assignment: { lsb: 2, width: 14 }, type: reserved, initial_value: 0}
+        - { name: baud_div, bit_assignment: { lsb: 16, width: 16 }, type: rw, initial_value: 0}
+
+  - register:
+    - name: uart_status
+      offset_address: 0x4
+      comment: |
+        Status register
+      type: external
+      bit_fields:
+        - { name: tx_full, bit_assignment: { lsb: 0, width: 1 }, type: ro, initial_value: 0}
+        - { name: tx_empty, bit_assignment: { lsb: 1, width: 1 }, type: ro, initial_value: 1}
+        - { name: rx_full, bit_assignment: { lsb: 2, width: 14 }, type: ro, initial_value: 0}
+        - { name: rx_empty, bit_assignment: { lsb: 3, width: 1 }, type: ro, initial_value: 1}
+
+  - register:
+    - name: uart_rdata
+      offset_address: 0x8
+      comment: |
+        Read Data Register
+      bit_fields:
+        - { name: rdata, bit_assignment: { lsb: 0, width: 8 }, type: rotrg, initial_value: 0}
+  
+  - register:  
+    - name: uart_wdata
+      offset_address: 0xC
+      comment: |
+        Write Data Register
+      bit_fields:
+        - { name: wdata, bit_assignment: { lsb: 0, width: 8 }, type: wotrg, initial_value: 0}
